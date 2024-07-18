@@ -86,7 +86,7 @@ const sendListTx = async ({
 
 sendListTx({
   buyerAddress: "7T2R49BKKYwZi5ju5u2cpTxiUXBa8yyridRh696Vnfko",
-  tokenMintAddress: "J6ipX72WEpsgdpjLNBsCNRVmcCKESQPKVtHu3NLUsLj7",
+  tokenMintAddress: "CsGHsNvFbfSFcfewT3ofN739g4a6wxJTW6HE5br1xALr",
   price: .1,
   auctionHouseAddress: "E8cU1WiRWjanGxmn96ewBgk9vPTcL6AEZ1t6F6fkgUWe",
 });

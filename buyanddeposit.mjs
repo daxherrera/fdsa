@@ -7,7 +7,7 @@ import { Connection, Keypair, VersionedTransaction, LAMPORTS_PER_SOL } from '@so
 dotenv.config();
 
 const bearerToken = process.env.API_KEY;
-const walletfile = '/Users/admin/.config/solana/HWPRgtDGpBm8mByTGS57BWCsijMo53qPPSbskWDukfTc.json'
+const walletfile = '/Users/admin/.config/solana/7T2R49BKKYwZi5ju5u2cpTxiUXBa8yyridRh696Vnfko.json'
 
 const secretKeyArray = JSON.parse(fs.readFileSync(walletfile, 'utf-8'))
 const secretKeyUint8Array = Uint8Array.from(secretKeyArray);
@@ -52,16 +52,16 @@ async function fetchTxData(endpoint) {
 const sendListTx = async ({
   buyerAddress,
   sellerAddress,
+  price,
   tokenMintAddress,
   tokenAccountAddress,
-  price,
-  newPrice,
   auctionHouseAddress,
 }) => {
   try {
-    const baseUrl = "https://api-devnet.magiceden.dev/v2/instructions/sell_now";
-    const endpointUrl = `${baseUrl}?buyer=${buyerAddress}&seller=${sellerAddress}&tokenMint=${tokenMintAddress}&tokenATA=${tokenAccountAddress}&price=${price}&newPrice=${newPrice}&priorityFee=100000&auctionHouseAddress=${auctionHouseAddress}&sellerExpiry=0&buyerExpiry=1`;
+    const baseUrl = "https://api-devnet.magiceden.io/v2/instructions/buy_and_deposit";
+    const endpointUrl = `${baseUrl}?buyer=${buyerAddress}&seller=${sellerAddress}&tokenMint=${tokenMintAddress}&tokenATA=${tokenAccountAddress}&price=${price}&auctionHouseAddress=${auctionHouseAddress}&sellerExpiry=0&buyerExpiry=1&buyerCreatorRoyaltyPercent=5&priorityFee=1&useBuyV2=true&uextraBpToDeposit=200`;
     console.log(endpointUrl)
+ 
     const txData = await fetchTxData(endpointUrl);
     const serializedTxData = new Uint8Array(txData.txSigned.data);
     console.log("txData", txData);
@@ -93,6 +93,5 @@ sendListTx({
   tokenMintAddress: "CixBPi522DYZLa853snsKjpSxSNpPU3MLiAHe8FLndHK",
   tokenAccountAddress: "5EBdCMnjWVscTNRCTsxy14XD5DpxFix2YMwKQfXAHbC8",
   price: .1,
-  newPrice: .1,
   auctionHouseAddress: "E8cU1WiRWjanGxmn96ewBgk9vPTcL6AEZ1t6F6fkgUWe",
 });
